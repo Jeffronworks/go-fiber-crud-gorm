@@ -30,12 +30,13 @@ func CreateUser(c *fiber.Ctx) error {
 }
 
 func GetUsers(c *fiber.Ctx) error {
-	users := []models.User{}
+	//declare an empty userSlice
+	usersSlice := []models.User{}
 
-	database.Database.Db.Find(&users)
+	database.Database.Db.Find(&usersSlice) // get users from the db and pass into the user slice 
 	responseUsers := []User{}
 
-	for _, user := range users {
+	for _, user := range usersSlice {
 		responseUser := CreateResponseUser(user)
 		responseUsers = append(responseUsers, responseUser)
 	}
