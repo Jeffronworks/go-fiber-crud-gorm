@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/jeffronworks/fiber-api/models"
-	"gorm.io/driver/sqlite"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
@@ -17,7 +17,8 @@ type DbInstance struct {
 var Database DbInstance
 
 func ConnectDb() {
-	db, err := gorm.Open(sqlite.Open("myCrudApi.db"), &gorm.Config{})
+	dsn := "host=192.168.95.41 user=jeffron password=root12 dbname=GoCrud port=5432 sslmode=disable TimeZone=Africa/Lagos"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal("Failed to connect to the database! \n", err.Error())
